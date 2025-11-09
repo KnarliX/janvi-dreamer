@@ -74,7 +74,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) =
             );
           },
           img({ node, src, alt, ...props }) {
-            const imgSrc = src?.startsWith('http') ? src : `/cdn/guide/img/${src}`;
+            const imgSrc = src?.startsWith('http') ? src : ${src};
             return <img src={imgSrc} alt={alt || ''} loading="lazy" {...props} />;
           }
         }}
