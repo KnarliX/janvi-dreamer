@@ -1,0 +1,116 @@
+# Overview
+
+Janvi Dreamer is a personal portfolio website for a gaming content creator and YouTuber from Madhya Pradesh, India. The site serves as a professional showcase featuring an interactive homepage with personal information, social media links, and a Discord verification portal. Built with React and modern web technologies using route-based code splitting for optimal multi-page performance, it emphasizes visual appeal with animations, dark/light theme support, and responsive design.
+
+# Recent Changes
+
+## November 9, 2025 - Documentation Guide Page
+- Created new `/guide` page for documentation and guides similar to discord.js guide
+- Features:
+  - OLED dark theme (#000) and light theme with system default support
+  - Language selector with search functionality for multiple language support
+  - Theme switcher (light/dark/system) with localStorage persistence
+  - Sidebar navigation with Lucide React icons
+  - Markdown rendering with syntax highlighting (highlight.js) and code copy buttons
+  - URL parameter support (`?type=` for doc selection, `?lang=` for language)
+  - Responsive design optimized for both desktop and mobile
+  - localStorage preferences saved with key `guide` for theme and language persistence
+- Components: Header, Sidebar, MarkdownRenderer
+- Utility functions in `guide-utils.ts` for doc management and preferences
+- Dedicated CSS file (`guide.css`) for custom styling
+- Added dependencies: react-markdown, rehype-highlight, rehype-raw, remark-gfm, highlight.js
+
+## November 4, 2025 - Cursor Styling Improvements
+- Comprehensive cursor styling audit and fixes across all interactive elements
+- Added `cursor-pointer` class to all custom buttons, links, and clickable divs throughout `client/src/pages` and `client/src/components`
+- Removed incorrect `cursor-pointer` from non-interactive hero avatar image
+- Fixed files: verification-portal.tsx, verify-now.tsx, welcome.tsx, hero-section.tsx, social-section.tsx, user-profile.tsx, verify.tsx, verification-footer.tsx
+- Note: Shadcn/ui Button components have correct cursor styling by default and don't require explicit cursor-pointer class
+
+# User Preferences
+
+Preferred communication style: Simple, everyday language.
+
+# Package Management Rules
+
+**Important**: Always use `pnpm` for package management instead of `npm`. This includes:
+- Installing packages: `pnpm install <package-name>`
+- Installing dev dependencies: `pnpm install -D <package-name>`
+- Running scripts: `pnpm run <script-name>`
+- Installing all dependencies: `pnpm install`
+
+Never use `npm install` or `npm` commands for this project.
+
+# System Architecture
+
+## Frontend Architecture
+- **Framework**: React 18 with TypeScript for type safety and modern development
+- **Routing**: Multi-page application with separate HTML entry points for each route
+- **Build System**: Vite for fast development and optimized production builds with manual chunk splitting
+- **State Management**: TanStack Query for server state and caching with React hooks for local state
+- **Code Splitting**: Route-based lazy loading ensures each page loads independently with its own chunk
+- **Documentation System**: `/guide` page with markdown rendering, multi-language support, and theme switching
+
+## UI and Styling
+- **Design System**: Shadcn/ui components built on Radix UI primitives
+- **Styling**: Tailwind CSS with custom design tokens and CSS variables
+- **Theming**: Dark/light mode support with CSS custom properties
+- **Typography**: Google Fonts (Inter, Playfair Display, JetBrains Mono)
+- **Animations**: Framer Motion for component animations, AOS for scroll animations, GSAP for interactive effects
+
+## Data Management
+- **Default Data System**: Centralized `/lib/default-data.ts` with modular exports for instant content display
+- **Data Source**: Hybrid approach using instant default data with background API replacement
+- **Loading Strategy**: Instant fallback display → background API loading → smooth data replacement
+- **Caching**: 5-minute cache duration with automatic fallback to static data
+- **Types**: Comprehensive TypeScript interfaces for data structures
+- **Service Layer**: Centralized data service with error handling and cache management
+
+## Component Structure
+- **Layout**: Modular section-based components (Hero, About, Social, Footer)
+- **UI Components**: Reusable Shadcn/ui components with consistent styling
+- **Reusable Verification Component**: `VerifyComponent` for YouTube verification flow that accepts user data and callback
+- **Responsive Design**: Mobile-first approach with optimized touch interactions
+- **Instant Loading**: Default data displays immediately with smooth transitions when API data loads
+
+## Verification System
+- **Token Generation**: Backend API integration at `https://janvi.jarvibeta.xyz/api/generate-token`
+- **Cookie Management**: 10-minute token caching in browser cookies to prevent duplicate API calls
+- **Authentication Check**: Login status verification using localStorage-based auth system
+- **Verification Flow**: `/verify/now` page handles login check, token generation, and verification state
+- **Smart Redirects**: Automatic redirects for non-logged users and already-verified users
+
+## Performance Optimizations
+- **Route-Based Code Splitting**: React.lazy() with Suspense for independent page loading
+- **Manual Chunk Splitting**: Vendor libraries (290kB), route-specific chunks (homepage 16kB, portal 16kB, not-found 3kB)
+- **Lazy Loading**: Each route loads only its required code and data on-demand
+- **Image Optimization**: WebP support with fallbacks
+- **Animation Performance**: Reduced motion support and mobile-optimized animations
+- **Caching Strategy**: Service worker ready with static asset caching
+- **Zero Loading Time**: Instant content display using centralized default data system
+
+# External Dependencies
+
+## Core Dependencies
+- **@radix-ui/react-***: Comprehensive set of accessible UI primitives for form controls, navigation, and overlays
+- **@tanstack/react-query**: Server state management and caching solution
+- **framer-motion**: Production-ready motion library for React animations
+- **class-variance-authority**: Utility for creating component variants with TypeScript support
+- **clsx** and **tailwind-merge**: Class name utilities for conditional styling
+- **react-markdown**: Markdown rendering for guide/documentation pages
+- **rehype-highlight**: Syntax highlighting for code blocks in markdown
+- **highlight.js**: Code syntax highlighting library
+- **remark-gfm**: GitHub Flavored Markdown support
+
+## Optional Integrations
+- **Remote API**: Backend service for real-time Discord and YouTube data (disabled for static hosting)
+- **AOS Library**: Animate On Scroll library loaded via CDN
+- **GSAP**: GreenSock Animation Platform for advanced interactions
+- **Google Fonts**: External font loading for typography
+- **Font Awesome**: Icon library for social media and UI icons
+
+## Static Assets
+- Favicon package with multiple sizes and formats
+- Fallback data JSON for offline functionality
+- Custom CSS for page-specific styling
+- Lottie animation player for interactive elements
