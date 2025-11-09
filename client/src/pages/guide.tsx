@@ -146,23 +146,6 @@ const GuidePage: React.FC = () => {
   const currentDoc = selectedDocId ? getDocById(selectedDocId) : null;
   const availableLanguages = currentDoc?.lang || [];
 
-  if (error === 'docs-not-available') {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-black text-white">
-        <div className="text-center space-y-4">
-          <h1 className="text-2xl font-bold">Document Not Available</h1>
-          <p className="text-white text-opacity-70">The requested guide could not be found.</p>
-          <button
-            onClick={() => window.location.href = '/guide'}
-            className="px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 rounded-lg transition-colors"
-          >
-            View Available Guides
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="guide-container min-h-screen">
       <Header
@@ -172,6 +155,7 @@ const GuidePage: React.FC = () => {
         selectedLanguage={selectedLangId || currentDoc?.defaultlang}
         onLanguageChange={handleLanguageChange}
         onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
+        sidebarOpen={sidebarOpen}
       />
 
       <Sidebar
@@ -183,15 +167,25 @@ const GuidePage: React.FC = () => {
       />
 
       <main className="guide-content pt-[calc(var(--header-height)+1rem)]">
-        {showAlert && (
-          <div className="mb-4 p-4 bg-yellow-500 bg-opacity-10 border border-yellow-500 border-opacity-30 rounded-lg">
-            <p className="text-yellow-200">{showAlert}</p>
-            <button
-              onClick={() => setShowAlert(null)}
-              className="mt-2 px-4 py-2 bg-yellow-500 bg-opacity-20 hover:bg-opacity-30 rounded-md text-sm transition-colors"
-            >
-              OK
-            </button>
+        {(showAlert || error === 'docs-not-available') && (
+          <div className="fixed top-[calc(var(--header-height)+1rem)] left-1/2 transform -translate-x-1/2 z-[60] w-full max-w-md px-4">
+            <div className="p-4 theme-light:bg-yellow-50 theme-light:border-yellow-400 theme-dark:bg-yellow-900 theme-dark:bg-opacity-20 theme-dark:border-yellow-600 border-2 rounded-lg shadow-2xl">
+              <p className="theme-light:text-yellow-900 theme-dark:text-yellow-200 font-medium">
+                {error === 'docs-not-available' ? 'Document not available' : showAlert}
+              </p>
+              <button
+                onClick={() => {
+                  if (error === 'docs-not-available') {
+                    window.location.href = '/guide';
+                  } else {
+                    setShowAlert(null);
+                  }
+                }}
+                className="mt-3 w-full px-4 py-2 theme-light:bg-yellow-400 theme-light:hover:bg-yellow-500 theme-light:text-yellow-900 theme-dark:bg-yellow-600 theme-dark:hover:bg-yellow-700 theme-dark:text-white rounded-md text-sm font-medium transition-colors cursor-pointer"
+              >
+                OK
+              </button>
+            </div>
           </div>
         )}
 

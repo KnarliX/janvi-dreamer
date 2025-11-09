@@ -12,6 +12,7 @@
     left: 0;
     overflow-y: auto;
     transition: transform 0.3s ease;
+    z-index: 30;
   }
 
   .guide-sidebar::-webkit-scrollbar {
@@ -44,9 +45,16 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 50;
+    z-index: 40;
     backdrop-filter: blur(10px);
+  }
+
+  .theme-dark .guide-header {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .theme-light .guide-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   .markdown-content {
@@ -238,9 +246,17 @@
   @media (max-width: 768px) {
     .guide-sidebar {
       transform: translateX(-100%);
-      z-index: 40;
+      z-index: 35;
+    }
+
+    .theme-dark .guide-sidebar {
       background: #000;
       border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-light .guide-sidebar {
+      background: #fff;
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     .guide-sidebar.mobile-open {

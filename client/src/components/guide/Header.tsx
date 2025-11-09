@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Moon, Sun, Monitor, Menu, Languages, Search, X } from 'lucide-react';
-import { Doc, Language } from '@/lib/guide-utils';
+import { Language } from '@/lib/guide-utils';
 
 interface HeaderProps {
   theme: 'light' | 'dark' | 'system';
@@ -9,6 +9,7 @@ interface HeaderProps {
   selectedLanguage?: string;
   onLanguageChange: (langId: string) => void;
   onMenuToggle: () => void;
+  sidebarOpen: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -17,11 +18,15 @@ export const Header: React.FC<HeaderProps> = ({
   availableLanguages,
   selectedLanguage,
   onLanguageChange,
-  onMenuToggle
+  onMenuToggle,
+  sidebarOpen
 }) => {
   const [showThemeMenu, setShowThemeMenu] = useState(false);
   const [showLangMenu, setShowLangMenu] = useState(false);
   const [langSearch, setLangSearch] = useState('');
+  
+  const themeMenuRef = useRef<HTMLDivElement>(null);
+  const langMenuRef = useRef<HTMLDivElement>(null);
 
   const themeIcons = {
     light: Sun,
@@ -38,13 +43,38 @@ export const Header: React.FC<HeaderProps> = ({
 
   const selectedLangName = availableLanguages.find(l => l.id === selectedLanguage)?.name || 'Select Language';
 
+  useEffect(() => {
+    if (sidebarOpen) {
+      setShowThemeMenu(false);
+      setShowLangMenu(false);
+    }
+  }, [sidebarOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (themeMenuRef.current && !themeMenuRef.current.contains(event.target as Node)) {
+        setShowThemeMenu(false);
+      }
+      if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
+        setShowLangMenu(false);
+      }
+    };
+
+    if (showThemeMenu || showLangMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, [showThemeMenu, showLangMenu]);
+
   return (
-    <header className="guide-header bg-black bg-opacity-80">
+    <header className="guide-header theme-light:bg-white theme-light:bg-opacity-95 theme-dark:bg-black theme-dark:bg-opacity-80">
       <div className="flex items-center justify-between h-full px-4 md:px-6">
         <div className="flex items-center gap-4">
           <button
             onClick={onMenuToggle}
-            className="md:hidden p-2 hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors"
+            className="md:hidden p-2 theme-light:hover:bg-black theme-light:hover:bg-opacity-10 theme-dark:hover:bg-white theme-dark:hover:bg-opacity-10 rounded-lg transition-colors cursor-pointer"
             aria-label="Toggle menu"
           >
             <Menu className="w-5 h-5" />
@@ -53,14 +83,14 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         <div className="flex items-center gap-2 md:gap-3">
-          <div className="relative">
+          <div className="relative" ref={langMenuRef}>
             <button
               onClick={() => {
                 setShowLangMenu(!showLangMenu);
                 setShowThemeMenu(false);
                 setLangSearch('');
               }}
-              className="p-2 hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors flex items-center gap-2"
+              className="p-2 theme-light:hover:bg-black theme-light:hover:bg-opacity-10 theme-dark:hover:bg-white theme-dark:hover:bg-opacity-10 rounded-lg transition-colors flex items-center gap-2 cursor-pointer"
               aria-label="Change language"
             >
               <Languages className="w-5 h-5" />
@@ -68,16 +98,16 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
 
             {showLangMenu && (
-              <div className="absolute right-0 mt-2 w-64 bg-black border border-white border-opacity-20 rounded-lg shadow-xl z-50">
-                <div className="p-2 border-b border-white border-opacity-10">
+              <div className="absolute right-0 mt-2 w-64 theme-light:bg-white theme-dark:bg-black theme-light:border-black theme-light:border-opacity-20 theme-dark:border-white theme-dark:border-opacity-20 border rounded-lg shadow-xl z-[100]">
+                <div className="p-2 border-b theme-light:border-black theme-light:border-opacity-10 theme-dark:border-white theme-dark:border-opacity-10">
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white text-opacity-50" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 theme-light:text-black theme-light:text-opacity-50 theme-dark:text-white theme-dark:text-opacity-50" />
                     <input
                       type="text"
                       placeholder="Search language..."
                       value={langSearch}
                       onChange={(e) => setLangSearch(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 bg-white bg-opacity-5 border border-white border-opacity-10 rounded-md text-sm focus:outline-none focus:border-opacity-30"
+                      className="w-full pl-9 pr-3 py-2 theme-light:bg-black theme-light:bg-opacity-5 theme-light:border-black theme-light:border-opacity-10 theme-dark:bg-white theme-dark:bg-opacity-5 theme-dark:border-white theme-dark:border-opacity-10 border rounded-md text-sm focus:outline-none theme-light:focus:border-opacity-30 theme-dark:focus:border-opacity-30"
                       autoFocus
                     />
                   </div>
@@ -92,15 +122,15 @@ export const Header: React.FC<HeaderProps> = ({
                           setShowLangMenu(false);
                           setLangSearch('');
                         }}
-                        className={`w-full text-left px-4 py-2.5 hover:bg-white hover:bg-opacity-10 transition-colors text-sm ${
-                          selectedLanguage === lang.id ? 'bg-white bg-opacity-5' : ''
+                        className={`w-full text-left px-4 py-2.5 theme-light:hover:bg-black theme-light:hover:bg-opacity-10 theme-dark:hover:bg-white theme-dark:hover:bg-opacity-10 transition-colors text-sm cursor-pointer ${
+                          selectedLanguage === lang.id ? 'theme-light:bg-black theme-light:bg-opacity-5 theme-dark:bg-white theme-dark:bg-opacity-5' : ''
                         }`}
                       >
                         {lang.name}
                       </button>
                     ))
                   ) : (
-                    <div className="px-4 py-6 text-center text-sm text-white text-opacity-50">
+                    <div className="px-4 py-6 text-center text-sm theme-light:text-black theme-light:text-opacity-50 theme-dark:text-white theme-dark:text-opacity-50">
                       No languages found
                     </div>
                   )}
@@ -109,20 +139,20 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </div>
 
-          <div className="relative">
+          <div className="relative" ref={themeMenuRef}>
             <button
               onClick={() => {
                 setShowThemeMenu(!showThemeMenu);
                 setShowLangMenu(false);
               }}
-              className="p-2 hover:bg-white hover:bg-opacity-10 rounded-lg transition-colors"
+              className="p-2 theme-light:hover:bg-black theme-light:hover:bg-opacity-10 theme-dark:hover:bg-white theme-dark:hover:bg-opacity-10 rounded-lg transition-colors cursor-pointer"
               aria-label="Change theme"
             >
               <CurrentThemeIcon className="w-5 h-5" />
             </button>
 
             {showThemeMenu && (
-              <div className="absolute right-0 mt-2 w-48 bg-black border border-white border-opacity-20 rounded-lg shadow-xl z-50">
+              <div className="absolute right-0 mt-2 w-48 theme-light:bg-white theme-dark:bg-black theme-light:border-black theme-light:border-opacity-20 theme-dark:border-white theme-dark:border-opacity-20 border rounded-lg shadow-xl z-[100]">
                 {(['light', 'dark', 'system'] as const).map((t) => {
                   const Icon = themeIcons[t];
                   return (
@@ -132,8 +162,8 @@ export const Header: React.FC<HeaderProps> = ({
                         onThemeChange(t);
                         setShowThemeMenu(false);
                       }}
-                      className={`w-full text-left px-4 py-2.5 hover:bg-white hover:bg-opacity-10 transition-colors flex items-center gap-3 text-sm ${
-                        theme === t ? 'bg-white bg-opacity-5' : ''
+                      className={`w-full text-left px-4 py-2.5 theme-light:hover:bg-black theme-light:hover:bg-opacity-10 theme-dark:hover:bg-white theme-dark:hover:bg-opacity-10 transition-colors flex items-center gap-3 text-sm cursor-pointer ${
+                        theme === t ? 'theme-light:bg-black theme-light:bg-opacity-5 theme-dark:bg-white theme-dark:bg-opacity-5' : ''
                       }`}
                     >
                       <Icon className="w-4 h-4" />
