@@ -25,6 +25,7 @@
   {
     "id": "cmd_verify",
     "name": "Verify using CMD",
+    "icon": "SquareSlash",
     "defaultlang": "en",
     "lang": [
       {
