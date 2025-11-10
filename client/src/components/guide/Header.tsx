@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Moon, Sun, Monitor, Menu, Languages, Search, X } from 'lucide-react';
+import { Moon, Sun, SunMoon, Menu, Languages, Search, X } from 'lucide-react';
 import { Doc, Language } from '@/lib/guide-utils';
 
 interface HeaderProps {
@@ -26,7 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
   const themeIcons = {
     light: Sun,
     dark: Moon,
-    system: Monitor
+    system: SunMoon
   };
 
   const CurrentThemeIcon = themeIcons[theme];
