@@ -2,6 +2,7 @@ import React from 'react';
 import * as LucideIcons from 'lucide-react';
 import type { Doc } from '@/lib/guide-types';
 import { FileText } from 'lucide-react';
+import { ArrowBigLeftDash } from 'lucide-react';
 
 interface SidebarProps {
   docs: Doc[];
@@ -36,6 +37,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
         className={`guide-sidebar ${isOpen ? 'mobile-open' : ''}`}
       >
         <div className="p-4">
+          <a
+            href="/"
+            className="flex items-center gap-3 px-4 py-3 mb-4 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/50"
+          >
+            <ArrowBigLeftDash className="w-5 h-5" />
+            <span className="text-sm">Back to Home</span>
+          </a>
           <div className="space-y-1">
             {docs.map((doc) => {
               const Icon = getIcon(doc.icon);
