@@ -40,16 +40,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <a
             href="/portal"
             className="
-              flex items-center gap-3 px-4 py-3 mb-4 rounded-xl font-semibold transition-all duration-300
-              bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
-              hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 
-              text-white shadow-md hover:shadow-lg hover:shadow-purple-500/40
-              dark:shadow-purple-500/30 dark:hover:shadow-purple-400/50
-              relative overflow-hidden
-              before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/10 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300
+              flex items-center gap-3 px-4 py-3 mb-4 rounded-lg font-medium transition-all duration-300
+              bg-gradient-to-r from-[#2B1055] via-[#4B1E75] to-[#1A1A40]
+              dark:from-[#2A1846] dark:via-[#4B1E75] dark:to-[#101020]
+              text-gray-100 dark:text-gray-50
+              hover:from-[#3B1570] hover:via-[#5C2A8E] hover:to-[#222244]
+              hover:text-white
+              shadow-[0_0_12px_rgba(100,70,255,0.3)] hover:shadow-[0_0_20px_rgba(130,90,255,0.45)]
+              backdrop-blur-sm border border-white/10
             "
           >
-            <ArrowBigLeftDash className="w-5 h-5 drop-shadow-sm" />
+            <ArrowBigLeftDash className="w-5 h-5 opacity-90" />
             <span className="text-sm tracking-wide">Back to Home</span>
           </a>
           <div className="space-y-1">
