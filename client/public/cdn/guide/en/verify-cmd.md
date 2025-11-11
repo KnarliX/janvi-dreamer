@@ -30,13 +30,12 @@ Continue with read-only permission to verify your YouTube account. Await the com
 
 ![Permission Grant](/cdn/guide/img/perm-grant.avif)
 
-> **Privacy Note:** We only access your YouTube account's public data and subscriptions for verification purposes. Your subscriptions are not stored in our database, and we cannot access your email address or any private information.
+> **<mark>Privacy Note</mark>:** We only access your YouTube account's public data and subscriptions for verification purposes. Your subscriptions are not stored in our database, and we cannot access your email address or any private information.
 
 ---
 
-### Step 5: Verification Completed
+### Step 5: <span style="color:green;">Verification Completed</span>
 Congratulations! You're now verified. All eligible roles and rewards have been automatically assigned on discord. Head back to the Discord server to see your new roles.
 
 ![Success Screen](/cdn/guide/img/success-screen.avif)
-
 ![verified msg](/cdn/guide/img/verified-msg.avif)
