@@ -10,10 +10,9 @@ import {
   savePreferences,
   getPreferences,
   getEffectiveTheme,
-  fetchMarkdown,
-  Doc,
-  Language
+  fetchMarkdown
 } from '@/lib/guide-utils';
+import type { Doc, Language } from '@/lib/guide-types';
 import '@/styles/fonts.css';
 import '@/styles/cursor.css';
 import '@/styles/index.css';
@@ -28,7 +27,7 @@ const GuidePage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('system');
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [showAlert, setShowAlert] = useState<string | null>(null);
+  const [showAlert, setShowAlert] = useState<{ type: 'language' | 'document'; message: string } | null>(null);
 
   useEffect(() => {
     const prefs = getPreferences();
@@ -43,25 +42,39 @@ const GuidePage: React.FC = () => {
     if (typeParam) {
       const doc = getDocById(typeParam);
       if (!doc) {
-        setError('docs-not-available');
+        setShowAlert({ type: 'document', message: 'Document not available' });
         setLoading(false);
-        return;
+        if (docs.length > 0) {
+          docId = docs[0].id;
+          setSelectedDocId(docs[0].id);
+        }
+      } else {
+        docId = typeParam;
+        setSelectedDocId(typeParam);
       }
-      docId = typeParam;
-      setSelectedDocId(typeParam);
     } else if (docs.length > 0) {
       docId = docs[0].id;
       setSelectedDocId(docs[0].id);
     }
 
-    if (langParam) {
-      setSelectedLangId(langParam);
-    } else if (prefs.lang && docId) {
+    if (docId) {
       const doc = getDocById(docId);
       if (doc) {
-        const langAvailable = doc.lang.find(l => l.id === prefs.lang);
-        if (langAvailable) {
-          setSelectedLangId(prefs.lang);
+        if (langParam) {
+          const langAvailable = doc.lang.find(l => l.id === langParam);
+          if (langAvailable) {
+            setSelectedLangId(langParam);
+          } else if (prefs.lang) {
+            const prefLangAvailable = doc.lang.find(l => l.id === prefs.lang);
+            if (prefLangAvailable) {
+              setSelectedLangId(prefs.lang);
+            }
+          }
+        } else if (prefs.lang) {
+          const prefLangAvailable = doc.lang.find(l => l.id === prefs.lang);
+          if (prefLangAvailable) {
+            setSelectedLangId(prefs.lang);
+          }
         }
       }
     }
@@ -79,12 +92,20 @@ const GuidePage: React.FC = () => {
     const language = getLanguageForDoc(doc, langToUse);
 
     if (!language) {
-      setShowAlert('Language not available for this guide');
+      setShowAlert(prev => {
+        if (prev?.type === 'document') return prev;
+        return { type: 'language', message: 'Language not available for this guide' };
+      });
       const defaultLang = getLanguageForDoc(doc);
       if (defaultLang) {
         setSelectedLangId(defaultLang.id);
         return;
       }
+    } else {
+      setShowAlert(prev => {
+        if (prev?.type === 'document') return prev;
+        return null;
+      });
     }
 
     if (language) {
@@ -98,7 +119,7 @@ const GuidePage: React.FC = () => {
           setMarkdown(content);
           setLoading(false);
           
-          if (selectedLangId && selectedLangId !== doc.defaultlang) {
+          if (selectedLangId) {
             savePreferences({ lang: selectedLangId });
           }
         })
@@ -146,23 +167,6 @@ const GuidePage: React.FC = () => {
   const currentDoc = selectedDocId ? getDocById(selectedDocId) : null;
   const availableLanguages = currentDoc?.lang || [];
 
-  if (error === 'docs-not-available') {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-black text-white">
-        <div className="text-center space-y-4">
-          <h1 className="text-2xl font-bold">Document Not Available</h1>
-          <p className="text-white text-opacity-70">The requested guide could not be found.</p>
-          <button
-            onClick={() => window.location.href = '/guide'}
-            className="px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 rounded-lg transition-colors"
-          >
-            View Available Guides
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="guide-container min-h-screen">
       <Header
@@ -172,7 +176,22 @@ const GuidePage: React.FC = () => {
         selectedLanguage={selectedLangId || currentDoc?.defaultlang}
         onLanguageChange={handleLanguageChange}
         onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
+        isSidebarOpen={sidebarOpen}
       />
+
+      {showAlert && (
+        <div className="guide-alert fixed top-[var(--header-height)] left-0 right-0 z-40">
+          <div className="alert-content">
+            <p className="alert-message">{showAlert.message}</p>
+            <button
+              onClick={() => setShowAlert(null)}
+              className="alert-button"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
 
       <Sidebar
         docs={docs}
@@ -183,31 +202,19 @@ const GuidePage: React.FC = () => {
       />
 
       <main className="guide-content pt-[calc(var(--header-height)+1rem)]">
-        {showAlert && (
-          <div className="mb-4 p-4 bg-yellow-500 bg-opacity-10 border border-yellow-500 border-opacity-30 rounded-lg">
-            <p className="text-yellow-200">{showAlert}</p>
-            <button
-              onClick={() => setShowAlert(null)}
-              className="mt-2 px-4 py-2 bg-yellow-500 bg-opacity-20 hover:bg-opacity-30 rounded-md text-sm transition-colors"
-            >
-              OK
-            </button>
-          </div>
-        )}
-
         {loading ? (
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center space-y-4">
-              <div className="w-12 h-12 border-4 border-white border-opacity-20 border-t-white rounded-full animate-spin mx-auto" />
-              <p className="text-white text-opacity-70">Loading guide...</p>
+              <div className="loading-spinner" />
+              <p className="loading-text">Loading guide...</p>
             </div>
           </div>
         ) : error ? (
           <div className="text-center space-y-4 py-12">
-            <p className="text-red-400">{error}</p>
+            <p className="error-text">{error}</p>
             <button
               onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 rounded-lg transition-colors"
+              className="retry-button"
             >
               Retry
             </button>

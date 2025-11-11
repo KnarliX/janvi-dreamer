@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
@@ -12,12 +12,15 @@ interface MarkdownRendererProps {
 
 const CodeBlock: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => {
   const [copied, setCopied] = useState(false);
+  const codeRef = useRef<HTMLElement>(null);
 
   const handleCopy = () => {
-    const code = String(children).replace(/\n$/, '');
-    navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    if (codeRef.current) {
+      const code = codeRef.current.textContent || '';
+      navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
   return (
@@ -40,7 +43,7 @@ const CodeBlock: React.FC<{ children: React.ReactNode; className?: string }> = (
         )}
       </button>
       <pre className={className}>
-        <code>{children}</code>
+        <code ref={codeRef}>{children}</code>
       </pre>
     </div>
   );

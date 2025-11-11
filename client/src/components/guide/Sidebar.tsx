@@ -1,6 +1,6 @@
 import React from 'react';
 import * as LucideIcons from 'lucide-react';
-import { Doc } from '@/lib/guide-utils';
+import type { Doc } from '@/lib/guide-types';
 import { FileText } from 'lucide-react';
 
 interface SidebarProps {
@@ -33,7 +33,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         />
       )}
       <aside
-        className={`guide-sidebar ${isOpen ? 'mobile-open' : ''} bg-black border-r border-white border-opacity-10`}
+        className={`guide-sidebar ${isOpen ? 'mobile-open' : ''}`}
       >
         <div className="p-4">
           <div className="space-y-1">
