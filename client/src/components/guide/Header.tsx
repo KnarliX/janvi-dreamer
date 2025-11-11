@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Moon, Sun, MonitorCog, Menu, Languages, Search, X } from 'lucide-react';
+import { Moon, Sun, MonitorCog, PanelLeftOpen, Languages, Search, PanelLeftClose } from 'lucide-react';
 import type { Language } from '@/lib/guide-types';
 import { getEffectiveTheme } from '@/lib/guide-utils';
 
@@ -91,7 +91,7 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
             aria-label={isSidebarOpen ? 'Close menu' : 'Open menu'}
           >
-            {isSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isSidebarOpen ? <PanelLeftClose className="w-5 h-5" /> : <PanelLeftOpen className="w-5 h-5" />}
           </button>
           <h1 className={`text-lg md:text-xl font-bold ${isLight ? 'text-black' : 'text-white'}`}>
             Guide
