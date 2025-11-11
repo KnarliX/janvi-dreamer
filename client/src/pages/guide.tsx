@@ -43,7 +43,7 @@ const GuidePage: React.FC = () => {
     if (typeParam) {
       const doc = getDocById(typeParam);
       if (!doc) {
-        setShowAlert({ type: 'document', message: 'Document not available' });
+        setShowAlert({ type: 'document', message: 'Requested Document not available' });
         setLoading(false);
         if (docs.length > 0) {
           docId = docs[0].id;
@@ -66,6 +66,7 @@ const GuidePage: React.FC = () => {
           if (langAvailable) {
             setSelectedLangId(langParam);
           } else {
+            setShowAlert({ type: 'language', message: 'Requested Language not available' });
             if (prefs.lang) {
               const prefLangAvailable = doc.lang.find(l => l.id === prefs.lang);
               if (prefLangAvailable) {
