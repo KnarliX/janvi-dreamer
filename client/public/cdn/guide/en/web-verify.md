@@ -5,9 +5,11 @@ Click the **Login with Discord** button after navigating to the [Verification Po
 
 ![Portal Login](/cdn/guide/img/portal-login.avif)
 
-> **<u>Important</u>:** It could take two to five seconds to redirect to the Discord Oauth process. During this process, please wait patiently and refrain from clicking more than once or refreshing the page.
+> **Important:** It could take two to five seconds to redirect to the Discord Oauth process. During this process, please wait patiently and refrain from clicking more than once or refreshing the page.
 
 ---
+
+## test
 
 ```JavaScript
 const js = require('@eslint/js');
@@ -64,6 +66,49 @@ module.exports = [
 	},
 ];
 ```
+### 🔹 Basic Formatting
+- <b>bold</b>
+- <strong>strong importance</strong>
+- <i>italic</i>
+- <em>emphasized</em>
+- <u>underlined</u>
+- <mark>highlighted</mark>
+- <small>small text</small>
+- <del>deleted text</del>
+- <ins>inserted text</ins>
+
+### 🔹 Quotation & Citation
+- <q>short quote</q>
+- <blockquote>long quote</blockquote>
+- <cite>citation</cite>
+- <abbr title="HyperText Markup Language">HTML</abbr>
+
+### 🔹 Code & Preformatted
+- <code>inline code</code>
+- <pre>preformatted text</pre>
+- <kbd>Ctrl</kbd> + <kbd>C</kbd>
+- <samp>output text</samp>
+- <var>x</var> = 10
+
+### 🔹 Sub/Superscript & Math
+- x<sup>2</sup>
+- H<sub>2</sub>O
+
+### 🔹 Semantic & Direction
+- <span style="color:red;">red span</span>
+- <bdi>اسم</bdi>
+- <bdo dir="rtl">Reversed text</bdo>
+
+### 🔹 Rare but Useful
+- <time datetime="2025-11-11">11 Nov 2025</time>
+- <ruby>漢 <rt>kan</rt></ruby>
+- <wbr>long<wbr>word<wbr>break<wbr>
+- <details><summary>Click me</summary>Hidden text</details>
+- <dfn>definition</dfn>
+- <address>123 Dreamer St.</address>
+
+
+---
 
 ### Step 2: Authorize with Discord bot
 Authorize the Dreamer Helper Discord bot to authenticate your account.
