@@ -104,43 +104,36 @@ const GuidePage: React.FC = () => {
     const language = getLanguageForDoc(doc, selectedLangId);
 
     if (!language) {
-      setShowAlert(prev => {
-        if (prev?.type === 'document') return prev;
-        return { type: 'language', message: 'Requested Language not available for this guide' };
-      });
       const defaultLang = getLanguageForDoc(doc);
       if (defaultLang) {
-        setSelectedLangId(defaultLang.id);
-        return;
-      }
-    } else {
-      setShowAlert(prev => {
-        if (prev?.type === 'document') return prev;
-        return null;
-      });
-    }
-
-    if (language) {
-      setLoading(true);
-      setError(null);
-      
-      document.title = `${doc.name} | Guide`;
-
-      fetchMarkdown(language.location)
-        .then((content) => {
-          setMarkdown(content);
-          setLoading(false);
-          
-          if (selectedLangId) {
-            savePreferences({ lang: selectedLangId });
-          }
-        })
-        .catch((err) => {
-          console.error('Failed to fetch markdown:', err);
-          setError('Failed to load guide content');
-          setLoading(false);
+        setShowAlert(prev => {
+          if (prev?.type === 'document') return prev;
+          return { type: 'language', message: 'Requested Language not available for this guide' };
         });
+        setSelectedLangId(defaultLang.id);
+      }
+      return;
     }
+
+    setLoading(true);
+    setError(null);
+    
+    document.title = `${doc.name} | Guide`;
+
+    fetchMarkdown(language.location)
+      .then((content) => {
+        setMarkdown(content);
+        setLoading(false);
+        
+        if (selectedLangId) {
+          savePreferences({ lang: selectedLangId });
+        }
+      })
+      .catch((err) => {
+        console.error('Failed to fetch markdown:', err);
+        setError('Failed to load guide content');
+        setLoading(false);
+      });
   }, [selectedDocId, selectedLangId]);
 
   useEffect(() => {
