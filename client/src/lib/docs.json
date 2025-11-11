@@ -13,7 +13,7 @@
       {
         "id": "hi",
         "name": "Hindi",
-        "location": "https://raw.githubusercontent.com/KnarliX/idkxxx/refs/heads/main/web-verify.md"
+        "location": "https://raw.githubusercontent.com/KnarliX/idkxxx/refs/heads/main/web-verify.mda"
       },
       {
         "id": "maith",
@@ -37,6 +37,11 @@
         "id": "hi",
         "name": "Hindi",
         "location": "/cdn/guide/hi/verify-cmd.md"
+      },
+      {
+        "id": "maith",
+        "name": "Maithili",
+        "location": "/cdn/guide/maith/verify-cmd.md"
       }
     ]
   },

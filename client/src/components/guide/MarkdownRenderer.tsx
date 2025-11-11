@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
-import { Check, Copy } from 'lucide-react';
+import { CopyCheck, Copy } from 'lucide-react';
 import 'highlight.js/styles/github-dark.css';
 
 interface MarkdownRendererProps {
@@ -29,7 +29,7 @@ const CodeBlock: React.FC<{ children: React.ReactNode; className?: string }> = (
       >
         {copied ? (
           <>
-            <Check className="inline w-4 h-4 mr-1" />
+            <CopyCheck className="inline w-4 h-4 mr-1" />
             Copied
           </>
         ) : (
@@ -74,8 +74,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) =
             );
           },
           img({ node, src, alt, ...props }) {
-            const imgSrc = src?.startsWith('http') ? src : src;
-            return <img src={imgSrc} alt={alt || ''} loading="lazy" {...props} />;
+            return <img src={src} alt={alt || ''} loading="lazy" {...props} />;
           }
         }}
       >
