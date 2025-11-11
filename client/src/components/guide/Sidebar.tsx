@@ -38,11 +38,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
       >
         <div className="p-4">
           <a
-            href="/"
-            className="flex items-center gap-3 px-4 py-3 mb-4 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/50"
+            href="/portal"
+            className="
+              flex items-center gap-3 px-4 py-3 mb-4 rounded-xl font-semibold transition-all duration-300
+              bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+              hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 
+              text-white shadow-md hover:shadow-lg hover:shadow-purple-500/40
+              dark:shadow-purple-500/30 dark:hover:shadow-purple-400/50
+              relative overflow-hidden
+              before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/10 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300
+            "
           >
-            <ArrowBigLeftDash className="w-5 h-5" />
-            <span className="text-sm">Back to Home</span>
+            <ArrowBigLeftDash className="w-5 h-5 drop-shadow-sm" />
+            <span className="text-sm tracking-wide">Back to Home</span>
           </a>
           <div className="space-y-1">
             {docs.map((doc) => {
