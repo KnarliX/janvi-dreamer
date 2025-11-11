@@ -42,7 +42,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             className="
               flex items-center gap-3 px-4 py-3 mb-4 rounded-lg font-semibold transition-all duration-300
               text-sm tracking-wide
-              border backdrop-blur-sm shadow-sm
+              border backdrop-blur-sm shadow-sm cursor-pointer
 
               bg-gradient-to-r from-[#f6f6f9] via-[#eaeaf1] to-[#dbdbe3]
               text-[#1c1c1e] border-[#d0d0da]/70
@@ -52,8 +52,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
               dark:from-[#2B1055] dark:via-[#4B1E75] dark:to-[#1A1A40]
               dark:text-gray-100 dark:border-white/10
-              dark:hover:from-[#3C1A70] dark:hover:via-[#5D2A8E] dark:hover:to-[#232246]
-              dark:hover:shadow-[0_0_25px_rgba(140,90,255,0.45)]
+              dark:hover:from-[#452089] dark:hover:via-[#6C38C6] dark:hover:to-[#2A205F]
+              dark:hover:shadow-[0_0_25px_rgba(150,100,255,0.5)] dark:hover:text-white
             "
           >
             <ArrowBigLeftDash className="w-5 h-5 opacity-90 transition-transform duration-300 group-hover:-translate-x-1" />
