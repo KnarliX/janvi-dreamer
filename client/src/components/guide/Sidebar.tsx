@@ -40,18 +40,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <a
             href="/portal"
             className="
-              flex items-center gap-3 px-4 py-3 mb-4 rounded-lg font-medium transition-all duration-300
-              bg-gradient-to-r from-[#2B1055] via-[#4B1E75] to-[#1A1A40]
-              dark:from-[#2A1846] dark:via-[#4B1E75] dark:to-[#101020]
-              text-gray-100 dark:text-gray-50
-              hover:from-[#3B1570] hover:via-[#5C2A8E] hover:to-[#222244]
-              hover:text-white
-              shadow-[0_0_12px_rgba(100,70,255,0.3)] hover:shadow-[0_0_20px_rgba(130,90,255,0.45)]
-              backdrop-blur-sm border border-white/10
+              flex items-center gap-3 px-4 py-3 mb-4 rounded-lg font-semibold transition-all duration-300
+              text-sm tracking-wide
+              border backdrop-blur-sm shadow-sm
+            bg-gradient-to-r from-[#f0f0f3] via-[#e7e7ec] to-[#d9d9e2]
+              text-[#222] border-[#d2d2da]/70
+              hover:from-[#e8e8ee] hover:via-[#dcdce5] hover:to-[#ccccd8]
+              hover:shadow-[0_2px_10px_rgba(0,0,0,0.1)]
+              hover:text-black
+          dark:from-[#2B1055] dark:via-[#4B1E75] dark:to-[#1A1A40]
+              dark:text-gray-100 dark:border-white/10
+              dark:hover:from-[#3B1570] dark:hover:via-[#5C2A8E] dark:hover:to-[#222244]
+              dark:hover:shadow-[0_0_20px_rgba(130,90,255,0.4)]
             "
           >
             <ArrowBigLeftDash className="w-5 h-5 opacity-90" />
-            <span className="text-sm tracking-wide">Back to Home</span>
+            <span>Back to Home</span>
           </a>
           <div className="space-y-1">
             {docs.map((doc) => {
