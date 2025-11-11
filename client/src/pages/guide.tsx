@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Sidebar } from '@/components/guide/Sidebar';
 import { Header } from '@/components/guide/Header';
@@ -28,6 +28,7 @@ const GuidePage: React.FC = () => {
   const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('system');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showAlert, setShowAlert] = useState<{ type: 'language' | 'document'; message: string } | null>(null);
+  const alertRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefs = getPreferences();
@@ -64,16 +65,28 @@ const GuidePage: React.FC = () => {
           const langAvailable = doc.lang.find(l => l.id === langParam);
           if (langAvailable) {
             setSelectedLangId(langParam);
-          } else if (prefs.lang) {
+          } else {
+            if (prefs.lang) {
+              const prefLangAvailable = doc.lang.find(l => l.id === prefs.lang);
+              if (prefLangAvailable) {
+                setSelectedLangId(prefs.lang);
+              } else {
+                setSelectedLangId(doc.defaultlang);
+              }
+            } else {
+              setSelectedLangId(doc.defaultlang);
+            }
+          }
+        } else {
+          if (prefs.lang) {
             const prefLangAvailable = doc.lang.find(l => l.id === prefs.lang);
             if (prefLangAvailable) {
               setSelectedLangId(prefs.lang);
+            } else {
+              setSelectedLangId(doc.defaultlang);
             }
-          }
-        } else if (prefs.lang) {
-          const prefLangAvailable = doc.lang.find(l => l.id === prefs.lang);
-          if (prefLangAvailable) {
-            setSelectedLangId(prefs.lang);
+          } else {
+            setSelectedLangId(doc.defaultlang);
           }
         }
       }
@@ -83,13 +96,12 @@ const GuidePage: React.FC = () => {
   }, [docs]);
 
   useEffect(() => {
-    if (!selectedDocId) return;
+    if (!selectedDocId || !selectedLangId) return;
 
     const doc = getDocById(selectedDocId);
     if (!doc) return;
 
-    const langToUse = selectedLangId || doc.defaultlang;
-    const language = getLanguageForDoc(doc, langToUse);
+    const language = getLanguageForDoc(doc, selectedLangId);
 
     if (!language) {
       setShowAlert(prev => {
@@ -145,6 +157,21 @@ const GuidePage: React.FC = () => {
     }
   }, [theme]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showAlert && alertRef.current && !alertRef.current.contains(event.target as Node)) {
+        setShowAlert(null);
+      }
+    };
+
+    if (showAlert) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, [showAlert]);
+
   const handleThemeChange = (newTheme: 'light' | 'dark' | 'system') => {
     setTheme(newTheme);
     savePreferences({ theme: newTheme });
@@ -155,8 +182,22 @@ const GuidePage: React.FC = () => {
   };
 
   const handleDocSelect = (docId: string) => {
+    const doc = getDocById(docId);
+    if (!doc) return;
+
     setSelectedDocId(docId);
-    setSelectedLangId(null);
+    
+    const prefs = getPreferences();
+    if (prefs.lang) {
+      const prefLangAvailable = doc.lang.find(l => l.id === prefs.lang);
+      if (prefLangAvailable) {
+        setSelectedLangId(prefs.lang);
+      } else {
+        setSelectedLangId(doc.defaultlang);
+      }
+    } else {
+      setSelectedLangId(doc.defaultlang);
+    }
     
     const newUrl = new URL(window.location.href);
     newUrl.searchParams.delete('type');
@@ -180,12 +221,16 @@ const GuidePage: React.FC = () => {
       />
 
       {showAlert && (
-        <div className="guide-alert fixed top-[var(--header-height)] left-0 right-0 z-40">
-          <div className="alert-content">
-            <p className="alert-message">{showAlert.message}</p>
+        <div className="alert-modal-backdrop" onClick={() => setShowAlert(null)}>
+          <div 
+            ref={alertRef}
+            className="alert-modal-content" 
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p className="alert-modal-message">{showAlert.message}</p>
             <button
               onClick={() => setShowAlert(null)}
-              className="alert-button"
+              className="alert-modal-button"
             >
               OK
             </button>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
@@ -12,19 +12,16 @@ interface MarkdownRendererProps {
 
 const CodeBlock: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => {
   const [copied, setCopied] = useState(false);
-  const codeRef = useRef<HTMLElement>(null);
 
   const handleCopy = () => {
-    if (codeRef.current) {
-      const code = codeRef.current.textContent || '';
-      navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
+    const code = String(children).replace(/\n$/, '');
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <div className="code-block-wrapper">
+    <pre className={`code-block ${className || ''}`}>
       <button
         onClick={handleCopy}
         className="code-copy-button"
@@ -42,10 +39,8 @@ const CodeBlock: React.FC<{ children: React.ReactNode; className?: string }> = (
           </>
         )}
       </button>
-      <pre className={className}>
-        <code ref={codeRef}>{children}</code>
-      </pre>
-    </div>
+      <code>{children}</code>
+    </pre>
   );
 };
 
@@ -59,7 +54,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) =
           code({ node, className, children, ...props }: any) {
             const inline = !className;
             if (inline) {
-              return <code className={className} {...props}>{children}</code>;
+              return <code className="inline-code" {...props}>{children}</code>;
             }
             return <CodeBlock className={className}>{children}</CodeBlock>;
           },

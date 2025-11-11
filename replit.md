@@ -4,6 +4,16 @@ Janvi Dreamer is a personal portfolio website for a gaming content creator and Y
 
 # Recent Changes
 
+## November 11, 2025 - Guide Page Bug Fixes and Improvements
+- Fixed language selection priority logic (URL param > localStorage > default language)
+- Implemented proper language persistence across page refreshes and document switches
+- Changed alert notifications from fixed banner to centered modal popup
+- Modal closes on clicking outside, clicking OK button, or pressing Escape
+- Fixed code block rendering to use single container instead of nested divs
+- Improved code block visibility in light theme with darker background (#1e293b)
+- Enhanced code copy button functionality with proper positioning
+- All interactive elements now work correctly in both light and dark themes
+
 ## November 9, 2025 - Documentation Guide Page
 - Created new `/guide` page for documentation and guides similar to discord.js guide
 - Features:
