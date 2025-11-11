@@ -13,7 +13,7 @@
       {
         "id": "hi",
         "name": "Hindi",
-        "location": "https://raw.githubusercontent.com/KnarliX/idkxxx/refs/heads/main/web-verify.mda"
+        "location": "/cdn/guide/hi/web-verify.md"
       },
       {
         "id": "maith",
@@ -24,7 +24,7 @@
   },
   {
     "id": "cmd_verify",
-    "name": "Verify using CMD",
+    "name": "Verify with CMD",
     "icon": "SquareSlash",
     "defaultlang": "en",
     "lang": [
@@ -46,8 +46,8 @@
     ]
   },
   {
-    "id": "dlt",
-    "name": "delete data",
+    "id": "data_dlt",
+    "name": "Data deletion",
     "icon": "Trash",
     "defaultlang": "maith",
     "lang": [

@@ -156,5 +156,4 @@ Continue with read-only permission to verify your YouTube account. Await the com
 Congratulations! You're now verified. All eligible roles and rewards have been automatically assigned on discord. Head back to the Discord server to see your new roles.
 
 ![Success Screen](/cdn/guide/img/success-screen.avif)
-
 ![verified msg](/cdn/guide/img/verified-msg.avif)
