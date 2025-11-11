@@ -66,7 +66,6 @@ const GuidePage: React.FC = () => {
           if (langAvailable) {
             setSelectedLangId(langParam);
           } else {
-            setShowAlert({ type: 'language', message: 'Requested Language not available' });
             if (prefs.lang) {
               const prefLangAvailable = doc.lang.find(l => l.id === prefs.lang);
               if (prefLangAvailable) {
@@ -107,7 +106,7 @@ const GuidePage: React.FC = () => {
     if (!language) {
       setShowAlert(prev => {
         if (prev?.type === 'document') return prev;
-        return { type: 'language', message: 'Language not available for this guide' };
+        return { type: 'language', message: 'Requested Language not available for this guide' };
       });
       const defaultLang = getLanguageForDoc(doc);
       if (defaultLang) {
