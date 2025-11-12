@@ -30,7 +30,7 @@ Continue with read-only permission to verify your YouTube account. Await the com
 
 ![Permission Grant](/cdn/guide/img/perm-grant.avif)
 
-> **<mark>Privacy Note</mark>:** We only access your YouTube account's public data and subscriptions for verification purposes. Your subscriptions are not stored in our database, and we cannot access your email address or any private information.
+> **<mark>Privacy Note:</mark>** We only access your YouTube account's public data and subscriptions for verification purposes. Your subscriptions are not stored in our database, and we cannot access your email address or any private information.
 
 ---
 

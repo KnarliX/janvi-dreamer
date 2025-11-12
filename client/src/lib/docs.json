@@ -16,14 +16,29 @@
         "location": "/cdn/guide/hi/web-verify.md"
       },
       {
-        "id": "maith",
+        "id": "maithili",
         "name": "Maithili",
-        "location": "/cdn/guide/maith/web-verify.md"
+        "location": "/cdn/guide/maithili/web-verify.md"
       },
       {
-        "id": "guj",
+        "id": "gujarati",
         "name": "Gujarati",
-        "location": "/cdn/guide/guj/web-verify.md"
+        "location": "/cdn/guide/gujarati/web-verify.md"
+      },
+      {
+        "id": "marathi",
+        "name": "Marathi",
+        "location": "/cdn/guide/marathi/web-verify.md"
+      },
+      {
+        "id": "bengali",
+        "name": "Bengali",
+        "location": "/cdn/guide/bengali/web-verify.md"
+      },
+      {
+        "id": "telugu",
+        "name": "Telugu",
+        "location": "/cdn/guide/telugu/web-verify.md"
       }
     ]
   },
@@ -44,14 +59,29 @@
         "location": "/cdn/guide/hi/verify-cmd.md"
       },
       {
-        "id": "maith",
+        "id": "maithili",
         "name": "Maithili",
-        "location": "/cdn/guide/maith/verify-cmd.md"
+        "location": "/cdn/guide/maithili/verify-cmd.md"
       },
       {
-        "id": "guj",
+        "id": "gujarati",
         "name": "Gujarati",
-        "location": "/cdn/guide/guj/verify-cmd.md"
+        "location": "/cdn/guide/gujarati/verify-cmd.md"
+      },
+      {
+        "id": "marathi",
+        "name": "Marathi",
+        "location": "/cdn/guide/marathi/verify-cmd.md"
+      },
+      {
+        "id": "bengali",
+        "name": "Bengali",
+        "location": "/cdn/guide/bengali/verify-cmd.md"
+      },
+      {
+        "id": "telugu",
+        "name": "Telugu",
+        "location": "/cdn/guide/telugu/verify-cmd.md"
       }
     ]
   },
@@ -72,14 +102,29 @@
         "location": "/cdn/guide/hi/data-dlt.md"
       },
       {
-        "id": "maith",
+        "id": "maithili",
         "name": "Maithili",
-        "location": "/cdn/guide/maith/data-dlt.md"
+        "location": "/cdn/guide/maithili/data-dlt.md"
       },
       {
-        "id": "guj",
+        "id": "gujarati",
         "name": "Gujarati",
-        "location": "/cdn/guide/guj/data-dlt.md"
+        "location": "/cdn/guide/gujarati/data-dlt.md"
+      },
+      {
+        "id": "marathi",
+        "name": "Marathi",
+        "location": "/cdn/guide/marathi/data-dlt.md"
+      },
+      {
+        "id": "bengali",
+        "name": "Bengali",
+        "location": "/cdn/guide/bengali/data-dlt.md"
+      },
+      {
+        "id": "telugu",
+        "name": "Telugu",
+        "location": "/cdn/guide/telugu/data-dlt.md"
       }
     ]
   }
