@@ -193,8 +193,7 @@ const GuidePage: React.FC = () => {
     }
     
     const newUrl = new URL(window.location.href);
-    newUrl.searchParams.delete('type');
-    newUrl.searchParams.delete('lang');
+    newUrl.searchParams.set('type', docId);
     window.history.pushState({}, '', newUrl.toString());
   };
 
