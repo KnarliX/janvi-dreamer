@@ -212,8 +212,34 @@
     color: rgba(255, 255, 255, 0.85);
   }
 
+  .markdown-content ul {
+    list-style-type: disc;
+    list-style-position: outside;
+  }
+
+  .markdown-content ol {
+    list-style-type: decimal;
+    list-style-position: outside;
+  }
+
   .markdown-content li {
     margin: 0.5rem 0;
+    display: list-item;
+    padding-left: 0.5rem;
+  }
+
+  .markdown-content ul ul {
+    list-style-type: circle;
+    margin: 0.25rem 0;
+  }
+
+  .markdown-content ol ol {
+    list-style-type: lower-alpha;
+    margin: 0.25rem 0;
+  }
+
+  .markdown-content li > p {
+    margin: 0.25rem 0;
   }
 
   .markdown-content .inline-code {
@@ -444,6 +470,11 @@
   .theme-light .markdown-content p,
   .theme-light .markdown-content li,
   .theme-light .markdown-content td {
+    color: rgba(0, 0, 0, 0.85);
+  }
+
+  .theme-light .markdown-content ul,
+  .theme-light .markdown-content ol {
     color: rgba(0, 0, 0, 0.85);
   }
 
