@@ -19,6 +19,11 @@
         "id": "maith",
         "name": "Maithili",
         "location": "/cdn/guide/maith/web-verify.md"
+      },
+      {
+        "id": "guj",
+        "name": "Gujarati",
+        "location": "/cdn/guide/guj/web-verify.md"
       }
     ]
   },
@@ -42,6 +47,11 @@
         "id": "maith",
         "name": "Maithili",
         "location": "/cdn/guide/maith/verify-cmd.md"
+      },
+      {
+        "id": "guj",
+        "name": "Gujarati",
+        "location": "/cdn/guide/guj/verify-cmd.md"
       }
     ]
   },
@@ -65,6 +75,11 @@
         "id": "maith",
         "name": "Maithili",
         "location": "/cdn/guide/maith/data-dlt.md"
+      },
+      {
+        "id": "guj",
+        "name": "Gujarati",
+        "location": "/cdn/guide/guj/data-dlt.md"
       }
     ]
   }
