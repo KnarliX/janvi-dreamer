@@ -108,17 +108,12 @@ const GuidePage: React.FC = () => {
       if (defaultLang) {
         setShowAlert({ type: 'language', message: 'Requested Language not available for this guide' });
         setSelectedLangId(defaultLang.id);
-        
-        const newUrl = new URL(window.location.href);
-        newUrl.searchParams.set('lang', defaultLang.id);
-        window.history.pushState({}, '', newUrl.toString());
       }
       return;
     }
 
     setLoading(true);
     setError(null);
-    setShowAlert(null);
     
     document.title = `${doc.name} | Guide`;
 
