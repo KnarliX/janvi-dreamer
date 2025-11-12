@@ -172,6 +172,10 @@ const GuidePage: React.FC = () => {
 
   const handleLanguageChange = (langId: string) => {
     setSelectedLangId(langId);
+    
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.set('lang', langId);
+    window.history.pushState({}, '', newUrl.toString());
   };
 
   const handleDocSelect = (docId: string) => {
