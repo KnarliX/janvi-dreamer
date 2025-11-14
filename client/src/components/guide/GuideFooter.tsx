@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Doc } from '@/lib/guide-types';
@@ -20,7 +19,6 @@ export const GuideFooter: React.FC<GuideFooterProps> = ({
 
   return (
     <footer className="guide-footer-container">
-      {/* Navigation Buttons */}
       <div className="guide-footer-navigation">
         <button
           onClick={() => previousDoc && onDocChange(previousDoc.id)}
@@ -45,31 +43,6 @@ export const GuideFooter: React.FC<GuideFooterProps> = ({
           </div>
           <ChevronRight className="w-5 h-5" />
         </button>
-      </div>
-
-      {/* Footer Links */}
-      <div className="guide-footer-links">
-        <div className="footer-links-container">
-          <div className="footer-copyright">
-            <p className="text-sm">
-              © {new Date().getFullYear()} Janvi Dreamer. Built with ❤️ by the one Who belongs to her forever.
-            </p>
-          </div>
-          <div className="footer-nav-links">
-            <a href="/" className="footer-link">
-              Home
-            </a>
-            <a href="/portal" className="footer-link">
-              Portal
-            </a>
-            <a href="/portal/privacy-policy" className="footer-link">
-              Privacy Policy
-            </a>
-            <a href="/guide" className="footer-link">
-              Guide
-            </a>
-          </div>
-        </div>
       </div>
     </footer>
   );
