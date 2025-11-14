@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, StepBack, StepForward } from 'lucide-react';
 import type { Doc } from '@/lib/guide-types';
 
 interface DocNavigatorProps {
@@ -26,7 +26,7 @@ export const DocNavigator: React.FC<DocNavigatorProps> = ({
           disabled={!previousDoc}
           className="doc-navigator-nav-button prev-button"
         >
-          <ChevronLeft className="w-5 h-5" />
+          <StepBack className="w-5 h-5" />
           <div className="nav-button-content">
             <span className="nav-button-label">Previous Page</span>
             {previousDoc && <span className="nav-button-title">{previousDoc.name}</span>}
@@ -42,7 +42,7 @@ export const DocNavigator: React.FC<DocNavigatorProps> = ({
             <span className="nav-button-label">Next Page</span>
             {nextDoc && <span className="nav-button-title">{nextDoc.name}</span>}
           </div>
-          <ChevronRight className="w-5 h-5" />
+          <StepForward className="w-5 h-5" />
         </button>
       </div>
     </div>
