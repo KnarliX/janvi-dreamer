@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Sidebar } from '@/components/guide/Sidebar';
 import { Header } from '@/components/guide/Header';
 import { MarkdownRenderer } from '@/components/guide/MarkdownRenderer';
-import { GuideFooter } from '@/components/guide/GuideFooter';
+import { DocNavigator } from '@/components/guide/DocNavigator';
 import {
   getDocs,
   getDocById,
@@ -261,7 +261,7 @@ const GuidePage: React.FC = () => {
         ) : (
           <>
             <MarkdownRenderer content={markdown} />
-            <GuideFooter
+            <DocNavigator
               currentDoc={currentDoc}
               allDocs={docs}
               onDocChange={handleDocSelect}

@@ -444,19 +444,19 @@
     border-right-color: rgba(0, 0, 0, 0.1);
   }
 
-  .guide-footer-container {
+  .doc-navigator-container {
     margin-top: 4rem;
     padding-bottom: 2rem;
   }
 
-  .guide-footer-navigation {
+  .doc-navigator-navigation {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     margin-bottom: 3rem;
   }
 
-  .guide-footer-nav-button {
+  .doc-navigator-nav-button {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -470,22 +470,22 @@
     text-align: left;
   }
 
-  .guide-footer-nav-button:hover:not(:disabled) {
+  .doc-navigator-nav-button:hover:not(:disabled) {
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
   }
 
-  .guide-footer-nav-button:disabled {
+  .doc-navigator-nav-button:disabled {
     opacity: 0.3;
     cursor: not-allowed;
   }
 
-  .guide-footer-nav-button.prev-button {
+  .doc-navigator-nav-button.prev-button {
     justify-content: flex-start;
   }
 
-  .guide-footer-nav-button.next-button {
+  .doc-navigator-nav-button.next-button {
     justify-content: flex-end;
     text-align: right;
   }
@@ -508,82 +508,27 @@
     font-weight: 600;
   }
 
-  .guide-footer-links {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 2rem;
-  }
-
-  .footer-links-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
-  }
-
-  .footer-copyright {
-    color: rgba(255, 255, 255, 0.6);
-    text-align: center;
-  }
-
-  .footer-nav-links {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .footer-link {
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    font-size: 0.875rem;
-    transition: color 0.2s ease;
-  }
-
-  .footer-link:hover {
-    color: rgba(255, 255, 255, 1);
-  }
-
   /* Light theme overrides */
-  .theme-light .guide-footer-nav-button {
+  .theme-light .doc-navigator-nav-button {
     border-color: rgba(0, 0, 0, 0.1);
     background: rgba(0, 0, 0, 0.02);
     color: rgba(0, 0, 0, 0.9);
   }
 
-  .theme-light .guide-footer-nav-button:hover:not(:disabled) {
+  .theme-light .doc-navigator-nav-button:hover:not(:disabled) {
     background: rgba(0, 0, 0, 0.05);
     border-color: rgba(0, 0, 0, 0.2);
   }
 
-  .theme-light .guide-footer-links {
-    border-top-color: rgba(0, 0, 0, 0.1);
-  }
-
-  .theme-light .footer-copyright {
-    color: rgba(0, 0, 0, 0.6);
-  }
-
-  .theme-light .footer-link {
-    color: rgba(0, 0, 0, 0.7);
-  }
-
-  .theme-light .footer-link:hover {
-    color: rgba(0, 0, 0, 1);
-  }
-
   @media (max-width: 768px) {
-    .guide-footer-navigation {
+    .doc-navigator-navigation {
       grid-template-columns: 1fr;
       gap: 0.75rem;
     }
 
-    .guide-footer-nav-button.next-button {
+    .doc-navigator-nav-button.next-button {
       justify-content: flex-start;
       text-align: left;
-    }
-
-    .footer-nav-links {
-      gap: 1rem;
     }
   }
 
